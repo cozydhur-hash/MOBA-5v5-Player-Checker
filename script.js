@@ -2,22 +2,23 @@
 const html = document.documentElement;
 
 function applyTheme(theme) {
-  html.setAttribute('data-theme', theme);
-  localStorage.setItem('ml_theme', theme);
+  html.setAttribute("data-theme", theme);
+  localStorage.setItem("ml_theme", theme);
 }
 
 function toggleTheme() {
-  const current = html.getAttribute('data-theme');
-  applyTheme(current === 'dark' ? 'light' : 'dark');
+  const current = html.getAttribute("data-theme");
+  applyTheme(current === "dark" ? "light" : "dark");
 }
 
 // Initialise: saved preference → system preference → dark
 (function initTheme() {
-  const saved  = localStorage.getItem('ml_theme');
-  const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  const saved = localStorage.getItem("ml_theme");
+  const system = window.matchMedia("(prefers-color-scheme: light)").matches
+    ? "light"
+    : "dark";
   applyTheme(saved || system);
 })();
-
 
 /* ── Player Checker ── */
 const userIdInput = document.getElementById("userId");
@@ -59,8 +60,9 @@ async function checkNickname() {
         localStorage.setItem("ml_zoneId", zoneId);
         resultDiv.className = "success";
         resultDiv.innerHTML =
-          '<span style="color:var(--muted);margin-right:6px;">Username:</span>' +
-          nickname;
+          '<span style="color:var(--success);font-weight:600;">' +
+          nickname +
+          "</span>";
       } else {
         resultDiv.className = "error";
         resultDiv.textContent = "No nickname found for this account.";
