@@ -1,31 +1,33 @@
 # MOBA 5v5 Player Checker
 
-A clean, minimal browser tool to look up player usernames in MOBA 5v5 (Mobile Legends: Bang Bang) using a User ID and Zone ID.
+A clean, minimal browser tool to look up MOBA 5v5 (Mobile Legends: Bang Bang) player profiles using a User ID and Zone ID.
 
 ---
 
 ## ✨ Features
 
-- 🔍 **Nickname Lookup** — Fetches a player's in-game name via User ID + Zone ID
-- 💾 **Remember Last Search** — Saves your last successful lookup to `localStorage` and lets you restore it with one click
-- 🌗 **Dark / Light Theme** — Respects your system preference on first load; toggle persists across sessions
+- 🔍 **Nickname & Country Lookup** — Fetches a player's in-game name and country via User ID + Zone ID
+- 💾 **Remember Last Search** — Saves your last successful lookup to `localStorage` and restores it with one click
+- 🌗 **Dark / Light Theme** — Respects system preference on first load; toggle persists across sessions
 - ⌨️ **Enter Key Support** — Press `Enter` anywhere on the page to trigger the lookup
 - ⚡ **Loading State** — Animated spinner with button lock while fetching
-- ✅ **Clear Feedback** — Color-coded result panel for success, error, and loading states
+- ✅ **Clear Feedback** — Color-coded result card (success / error / loading states)
+- 🔒 **Inspect Protection** — Right-click and common DevTools shortcuts are disabled
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer   | Technology                                                      |
-| ------- | --------------------------------------------------------------- |
-| Markup  | HTML5 (semantic)                                                |
-| Styling | Vanilla CSS (CSS custom properties)                             |
-| Logic   | Vanilla JavaScript (ES2017 async/await)                         |
-| Fonts   | Plus Jakarta Sans, JetBrains Mono (Google Fonts)                |
-| API     | [isan.eu.org Nickname API](https://api.isan.eu.org/nickname/ml) |
+| Layer   | Technology                                       |
+| ------- | ------------------------------------------------ |
+| Markup  | HTML5 (semantic)                                 |
+| Styling | Vanilla CSS (CSS custom properties)              |
+| Logic   | Vanilla JavaScript (ES2017 async/await)          |
+| Icons   | [Lucide](https://lucide.dev) (CDN)               |
+| Fonts   | Plus Jakarta Sans, JetBrains Mono (Google Fonts) |
+| API     | MooGold ID Validation (via corsproxy.io)         |
 
-No build tools, frameworks, or dependencies — just open `index.html` in any browser.
+No build tools or frameworks — just open `index.html` in any browser.
 
 ---
 
@@ -33,9 +35,9 @@ No build tools, frameworks, or dependencies — just open `index.html` in any br
 
 ```
 MOBA 5v5 Player Checker/
-├── index.html    # App shell, form, and theme toggle button
+├── index.html    # App shell, form, icons, and theme toggle
 ├── styles.css    # Full design system — dark/light themes, components, animations
-└── script.js     # Theme system, API fetch logic, localStorage helpers
+└── script.js     # DevTools block, theme system, API fetch logic, localStorage helpers
 ```
 
 ---
@@ -51,7 +53,7 @@ MOBA 5v5 Player Checker/
 
 | Button             | Action                                                            |
 | ------------------ | ----------------------------------------------------------------- |
-| **Check Nickname** | Fetches the player nickname for the entered IDs                   |
+| **Check Nickname** | Fetches the player nickname and country for the entered IDs       |
 | **Use Previous**   | Restores the last successful User ID + Zone ID from local storage |
 | **Clear**          | Clears the input fields (does **not** wipe saved data)            |
 | **☀️ / 🌙 icon**   | Toggles between light and dark theme (top-right corner)           |
@@ -60,20 +62,24 @@ MOBA 5v5 Player Checker/
 
 ## 🌐 API
 
-Lookups are powered by the public **isan.eu.org** nickname API:
+Lookups use the **MooGold ID Validation** endpoint, routed through **corsproxy.io** to bypass browser CORS restrictions.
+
+The API returns a structured message with the following fields:
 
 ```
-GET https://api.isan.eu.org/nickname/ml?id={userId}&zone={zoneId}
+User ID: …
+Server ID: …
+In-Game Nickname: …
+Country: …
 ```
 
-- Returns a JSON object containing the player's `name` or `nickname` field.
-- No API key required.
+No API key required.
 
 ---
 
 ## 🎨 Design System
 
-The UI uses CSS custom properties for theming, making it trivial to swap or extend colors.
+The UI uses CSS custom properties for theming.
 
 | Token       | Dark value        | Light value       |
 | ----------- | ----------------- | ----------------- |
@@ -100,8 +106,4 @@ Data is saved **only** when a lookup returns a valid nickname.
 
 ## 📄 License
 
-This project is open-source and free to use for personal use.
-
----
-
-Made with ❤️ by **cozydhur**
+© 2026 @cozydhur. All rights reserved.

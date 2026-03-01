@@ -43,21 +43,36 @@
 
     <div class="form">
         <div class="field">
-            <label for="userId">User ID</label>
+            <label for="userId">
+              <i data-lucide="user" class="label-icon"></i>
+              User ID
+            </label>
             <input type="number" inputmode="numeric" id="userId" placeholder="e.g. 12345678" autocomplete="off">
         </div>
 
         <div class="field">
-            <label for="zoneId">Zone ID</label>
+            <label for="zoneId">
+              <i data-lucide="map-pin" class="label-icon"></i>
+              Zone ID
+            </label>
             <input type="number" inputmode="numeric" id="zoneId" placeholder="e.g. 1234" autocomplete="off">
         </div>
 
         <div class="btn-row">
-            <button class="btn-ghost" onclick="loadPrevious()">Use Previous</button>
-            <button class="btn-ghost" onclick="clearFields()">Clear</button>
+            <button class="btn-ghost" onclick="loadPrevious()">
+              <i data-lucide="clock-4"></i>
+              Use Previous
+            </button>
+            <button class="btn-ghost" onclick="clearFields()">
+              <i data-lucide="x"></i>
+              Clear
+            </button>
         </div>
 
-        <button id="lookupBtn" onclick="checkNickname()">Check Nickname</button>
+        <button id="lookupBtn" onclick="checkNickname()">
+          <i data-lucide="search"></i>
+          Check Nickname
+        </button>
     </div>
 
     <div class="result-wrapper">
@@ -65,7 +80,9 @@
     </div>
 </div>
 
+<script src="https://unpkg.com/lucide@latest"></script>
 <script src="script.js"></script>
+<script>lucide.createIcons();</script>
 
 <footer class="site-footer">Made with ❤️ by <span class="footer-author">cozydhur</span>.</footer>
 
