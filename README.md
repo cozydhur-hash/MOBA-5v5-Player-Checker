@@ -12,6 +12,7 @@ A clean, minimal browser tool to look up MOBA 5v5 (Mobile Legends: Bang Bang) pl
 - ⌨️ **Enter Key Support** — Press `Enter` anywhere on the page to trigger the lookup
 - ⚡ **Loading State** — Animated spinner with button lock while fetching
 - ✅ **Clear Feedback** — Color-coded result card (success / error / loading states)
+- 📱 **Mobile Responsive** — Optimised layout for small screens; theme button always clear of content
 - 🔒 **Inspect Protection** — Right-click and common DevTools shortcuts are disabled
 
 ---
@@ -35,9 +36,11 @@ No build tools or frameworks — just open `index.html` in any browser.
 
 ```
 MOBA 5v5 Player Checker/
-├── index.html    # App shell, form, icons, and theme toggle
-├── styles.css    # Full design system — dark/light themes, components, animations
-└── script.js     # DevTools block, theme system, API fetch logic, localStorage helpers
+├── api/
+│   └── validate.js   # Vercel serverless function — proxies MooGold request server-side
+├── index.html        # App shell, form, icons, and theme toggle
+├── styles.css        # Full design system — dark/light themes, components, animations, mobile layout
+└── script.js         # DevTools block, theme system, API fetch logic, localStorage helpers
 ```
 
 ---

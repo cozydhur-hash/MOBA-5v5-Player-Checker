@@ -460,3 +460,27 @@ button:disabled {
   font-weight: 600;
   color: var(--accent);
 }
+
+/* ── Mobile responsive ── */
+@media (max-width: 480px) {
+  body {
+    /* Push content below the fixed theme-toggle button */
+    padding: 80px 16px 24px;
+    justify-content: flex-start;
+  }
+
+  .card {
+    padding: 28px 20px;
+  }
+
+  /* Compensate divider for new card padding */
+  .divider {
+    margin: 0 -20px;
+  }
+
+  /* Keep theme toggle away from the card edge */
+  .theme-toggle {
+    top: 16px;
+    right: 16px;
+  }
+}
