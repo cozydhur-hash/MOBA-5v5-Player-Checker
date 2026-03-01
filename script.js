@@ -62,33 +62,43 @@ async function checkNickname() {
   resultDiv.innerHTML = '<span class="spinner"></span>Checking…';
 
   try {
-    const targetUrl =
-      "https://moogold.com/wp-content/plugins/id-validation-new/id-validation-ajax.php";
-    const url = "https://corsproxy.io/?" + encodeURIComponent(targetUrl);
+    const isLocal =
+      location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
-    const payload = new URLSearchParams({
-      attribute_amount: "Weekly Pass",
-      "text-5f6f144f8ffee": userId,
-      "text-1601115253775": zoneId,
-      quantity: 1,
-      "add-to-cart": 15145,
-      product_id: 15145,
-      variation_id: 4690783,
-    });
+    let data;
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Referer: "https://moogold.com/product/mobile-legends/",
-        Origin: "https://moogold.com",
-      },
-      body: payload.toString(),
-    });
+    if (isLocal) {
+      // Local dev: route through corsproxy.io (no server available)
+      const targetUrl =
+        "https://moogold.com/wp-content/plugins/id-validation-new/id-validation-ajax.php";
+      const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(targetUrl);
 
-    if (!response.ok) throw new Error("HTTP " + response.status);
+      const payload = new URLSearchParams({
+        attribute_amount: "Weekly Pass",
+        "text-5f6f144f8ffee": userId,
+        "text-1601115253775": zoneId,
+        quantity: 1,
+        "add-to-cart": 15145,
+        product_id: 15145,
+        variation_id: 4690783,
+      });
 
-    const data = await response.json();
+      const res = await fetch(proxyUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: payload.toString(),
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      data = await res.json();
+    } else {
+      // Production (Vercel): use the serverless API route — no CORS issues
+      const res = await fetch(
+        `/api/validate?userId=${encodeURIComponent(userId)}&zoneId=${encodeURIComponent(zoneId)}`
+      );
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      data = await res.json();
+    }
+
     const message = data.message;
 
 
