@@ -1,112 +1,48 @@
 # MOBA 5v5 Player Checker
 
-A clean, minimal browser tool to look up MOBA 5v5 (Mobile Legends: Bang Bang) player profiles using a User ID and Zone ID.
+A minimal, production-ready vanilla JavaScript web application to look up player profiles using a User ID and Zone ID.
 
----
+Features a scalable ES module architecture and a serverless proxy pattern for safe client interactions.
 
-## ✨ Features
+## Tech Stack
 
-- 🔍 **Nickname & Country Lookup** — Fetches a player's in-game name and country via User ID + Zone ID
-- 💾 **Remember Last Search** — Saves your last successful lookup to `localStorage` and restores it with one click
-- 🌗 **Dark / Light Theme** — Respects system preference on first load; toggle persists across sessions
-- ⌨️ **Enter Key Support** — Press `Enter` anywhere on the page to trigger the lookup
-- ⚡ **Loading State** — Animated spinner with button lock while fetching
-- ✅ **Clear Feedback** — Color-coded result card (success / error / loading states)
-- 📱 **Mobile Responsive** — Optimised layout for small screens; theme button always clear of content
-- 🔒 **Inspect Protection** — Right-click and common DevTools shortcuts are disabled
+- **Frontend**: HTML5, Vanilla CSS (Custom Properties), Vanilla JS (ES Modules)
+- **Icons**: Lucide
+- **Backend / API proxy**: Node.js (Vercel Serverless Function)
 
----
+## Local Development
 
-## 🛠️ Tech Stack
+1.  **Clone the repository:**
 
-| Layer   | Technology                                       |
-| ------- | ------------------------------------------------ |
-| Markup  | HTML5 (semantic)                                 |
-| Styling | Vanilla CSS (CSS custom properties)              |
-| Logic   | Vanilla JavaScript (ES2017 async/await)          |
-| Icons   | [Lucide](https://lucide.dev) (CDN)               |
-| Fonts   | Plus Jakarta Sans, JetBrains Mono (Google Fonts) |
-| API     | MooGold ID Validation (via corsproxy.io)         |
+    ```bash
+    git clone <your-repo-url>
+    cd moba-player-checker
+    ```
 
-No build tools or frameworks — just open `index.html` in any browser.
+2.  **Run a local server:**
+    Because the application uses ES Modules (`<script type="module">`), it must be served via HTTP to avoid CORS restrictions on local `.js` files.
 
----
+    ```bash
+    # using npx
+    npx serve .
 
-## 📂 Project Structure
+    # or using python
+    python -m http.server
+    ```
 
-```
-MOBA 5v5 Player Checker/
-├── api/
-│   └── validate.js   # Vercel serverless function — proxies MooGold request server-side
-├── index.html        # App shell, form, icons, and theme toggle
-├── styles.css        # Full design system — dark/light themes, components, animations, mobile layout
-└── script.js         # DevTools block, theme system, API fetch logic, localStorage helpers
-```
+3.  **Local API Proxy Behavior:**
+    When the app detects it is running on `localhost` or `127.0.0.1`, it automatically routes validation requests through `corsproxy.io` to bypass browser restrictions. No local backend setup is required.
 
----
+## Deployment to Vercel
 
-## 🚀 Usage
+This project is structured for zero-config deployment to Vercel.
 
-1. Clone or download this repository.
-2. Open `index.html` in any modern browser — **no server required**.
-3. Enter your **User ID** and **Zone ID** from Mobile Legends.
-4. Click **Check Nickname** (or press `Enter`).
+1.  Push the repository to GitHub.
+2.  Import the repository into Vercel.
+3.  Ensure the Framework Preset is set to **Other**.
+4.  Leave Build Command and Output Directory empty (or default).
+5.  Deploy.
 
-### Button Reference
+Vercel will detect the `index.html` as the static output and compile the `api/validate.js` function into a Serverless Function automatically.
 
-| Button             | Action                                                            |
-| ------------------ | ----------------------------------------------------------------- |
-| **Check Nickname** | Fetches the player nickname and country for the entered IDs       |
-| **Use Previous**   | Restores the last successful User ID + Zone ID from local storage |
-| **Clear**          | Clears the input fields (does **not** wipe saved data)            |
-| **☀️ / 🌙 icon**   | Toggles between light and dark theme (top-right corner)           |
-
----
-
-## 🌐 API
-
-Lookups use the **MooGold ID Validation** endpoint, routed through **corsproxy.io** to bypass browser CORS restrictions.
-
-The API returns a structured message with the following fields:
-
-```
-User ID: …
-Server ID: …
-In-Game Nickname: …
-Country: …
-```
-
-No API key required.
-
----
-
-## 🎨 Design System
-
-The UI uses CSS custom properties for theming.
-
-| Token       | Dark value        | Light value       |
-| ----------- | ----------------- | ----------------- |
-| `--bg`      | `#000000`         | `#f8f9fb`         |
-| `--surface` | `#0a0a0a`         | `#ffffff`         |
-| `--accent`  | `#10b981`         | `#059669`         |
-| `--error`   | `#f87171`         | `#dc2626`         |
-| `--font`    | Plus Jakarta Sans | Plus Jakarta Sans |
-| `--mono`    | JetBrains Mono    | JetBrains Mono    |
-
----
-
-## 📦 Local Storage Keys
-
-| Key         | Description                          |
-| ----------- | ------------------------------------ |
-| `ml_theme`  | Last chosen theme (`dark` / `light`) |
-| `ml_userId` | Last successfully looked-up User ID  |
-| `ml_zoneId` | Last successfully looked-up Zone ID  |
-
-Data is saved **only** when a lookup returns a valid nickname.
-
----
-
-## 📄 License
-
-© 2026 @cozydhur. All rights reserved.
+_Note: There are currently no environment variables required for deployment (`.env` is not needed)._

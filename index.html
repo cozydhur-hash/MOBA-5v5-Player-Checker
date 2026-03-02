@@ -1,90 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MOBA 5v5 Player Checker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/css/main.css" />
+  </head>
+  <body>
+    <!-- Theme toggle: top-right, icon-only circular button -->
+    <button
+      class="theme-toggle"
+      id="themeToggle"
+      type="button"
+      title="Toggle theme"
+      aria-label="Toggle theme"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        width="1em"
+        height="1em"
+        class="theme-toggle__dark-side"
+        fill="currentColor"
+        viewBox="0 0 32 32"
+      >
+        <path
+          d="M16 .5C7.4.5.5 7.4.5 16S7.4 31.5 16 31.5 31.5 24.6 31.5 16 24.6.5 16 .5zm0 28.1V3.4C23 3.4 28.6 9 28.6 16S23 28.6 16 28.6z"
+        />
+      </svg>
+    </button>
 
-<!-- Theme toggle: top-right, icon-only circular button -->
-<button
-  class="theme-toggle"
-  id="themeToggle"
-  type="button"
-  title="Toggle theme"
-  aria-label="Toggle theme"
-  onclick="toggleTheme()"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    width="1em"
-    height="1em"
-    class="theme-toggle__dark-side"
-    fill="currentColor"
-    viewBox="0 0 32 32"
-  >
-    <path d="M16 .5C7.4.5.5 7.4.5 16S7.4 31.5 16 31.5 31.5 24.6 31.5 16 24.6.5 16 .5zm0 28.1V3.4C23 3.4 28.6 9 28.6 16S23 28.6 16 28.6z" />
-  </svg>
-</button>
-
-<div class="card">
-    <div class="header">
+    <div class="card">
+      <div class="header">
         <h1>MOBA 5v5 Player Checker</h1>
-        <p>Enter your in-game User ID and Zone ID to look up your player profile.</p>
-    </div>
+        <p>
+          Enter your in-game User ID and Zone ID to look up your player profile.
+        </p>
+      </div>
 
-    <div class="divider"></div>
+      <div class="divider"></div>
 
-    <div class="form">
+      <div class="form">
         <div class="field">
-            <label for="userId">
-              <i data-lucide="user" class="label-icon"></i>
-              User ID
-            </label>
-            <input type="number" inputmode="numeric" id="userId" placeholder="e.g. 12345678" autocomplete="off">
+          <label for="userId">
+            <i data-lucide="user" class="label-icon"></i>
+            User ID
+          </label>
+          <input
+            type="number"
+            inputmode="numeric"
+            id="userId"
+            placeholder="e.g. 12345678"
+            autocomplete="off"
+          />
         </div>
 
         <div class="field">
-            <label for="zoneId">
-              <i data-lucide="map-pin" class="label-icon"></i>
-              Zone ID
-            </label>
-            <input type="number" inputmode="numeric" id="zoneId" placeholder="e.g. 1234" autocomplete="off">
+          <label for="zoneId">
+            <i data-lucide="map-pin" class="label-icon"></i>
+            Zone ID
+          </label>
+          <input
+            type="number"
+            inputmode="numeric"
+            id="zoneId"
+            placeholder="e.g. 1234"
+            autocomplete="off"
+          />
         </div>
 
         <div class="btn-row">
-            <button class="btn-ghost" onclick="loadPrevious()">
-              <i data-lucide="clock-4"></i>
-              Use Previous
-            </button>
-            <button class="btn-ghost" onclick="clearFields()">
-              <i data-lucide="x"></i>
-              Clear
-            </button>
+          <button class="btn-ghost" id="usePreviousBtn">
+            <i data-lucide="clock-4"></i>
+            Use Previous
+          </button>
+          <button class="btn-ghost" id="clearBtn">
+            <i data-lucide="x"></i>
+            Clear
+          </button>
         </div>
 
-        <button id="lookupBtn" onclick="checkNickname()">
+        <button id="lookupBtn">
           <i data-lucide="search"></i>
           Check Nickname
         </button>
-    </div>
+      </div>
 
-    <div class="result-wrapper">
+      <div class="result-wrapper">
         <div id="result"></div>
+      </div>
     </div>
-</div>
 
-<script src="https://unpkg.com/lucide@latest"></script>
-<script src="script.js"></script>
-<script>lucide.createIcons();</script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="src/js/main.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
 
-<footer class="site-footer">Made with ❤️ by <span class="footer-author">cozydhur</span>.</footer>
-
-</body>
+    <footer class="site-footer">
+      Made with ❤️ by <span class="footer-author">cozydhur</span>.
+    </footer>
+  </body>
 </html>

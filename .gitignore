@@ -1,0 +1,13 @@
+node_modules/
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel/
+
+# Editor
+.vscode/
+.idea/
