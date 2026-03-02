@@ -1,48 +1,34 @@
-# MOBA 5v5 Player Checker
+# MLBB Lookup — Mobile Legends Player Profile & Region Checker
 
-A minimal, production-ready vanilla JavaScript web application to look up player profiles using a User ID and Zone ID.
+A fast, minimalistic, and production-ready web application to verify Mobile Legends: Bang Bang (MLBB) player profiles and their geographic region using an in-game User ID and Zone ID.
 
-Features a scalable ES module architecture and a serverless proxy pattern for safe client interactions.
+## What It Does
 
-## Tech Stack
+The application provides an instant lookup to check the validity of any MLBB account. By entering the User ID and Zone ID, it retrieves the in-game Nickname and the Country/Region associated with that account.
 
-- **Frontend**: HTML5, Vanilla CSS (Custom Properties), Vanilla JS (ES Modules)
-- **Icons**: Lucide
-- **Backend / API proxy**: Node.js (Vercel Serverless Function)
+## How to Use
+
+1. Enter the player's 8-10 digit **User ID** in the first field.
+2. Enter the player's 4-5 digit **Zone ID** in the second field.
+3. Click the **Check Nickname** button to fetch the player's profile.
+
+You easily recall previous searches by clicking the "Use Previous" button. The application supports an automatic Dark/Light mode theme based on your system preferences, which you can manually toggle using the top-right button.
 
 ## Local Development
 
-1.  **Clone the repository:**
+If you'd like to run the website locally on your own machine:
 
-    ```bash
-    git clone <your-repo-url>
-    cd moba-player-checker
-    ```
+1. Clone or download the repository.
+2. Because the application uses ES Modules, it needs to be served via an HTTP server. Run a simple local server in the project directory:
 
-2.  **Run a local server:**
-    Because the application uses ES Modules (`<script type="module">`), it must be served via HTTP to avoid CORS restrictions on local `.js` files.
+```bash
+# Using Python
+python -m http.server
 
-    ```bash
-    # using npx
-    npx serve .
+# Or using Node/npx
+npx serve .
+```
 
-    # or using python
-    python -m http.server
-    ```
+3. Open the provided `localhost` URL in your browser.
 
-3.  **Local API Proxy Behavior:**
-    When the app detects it is running on `localhost` or `127.0.0.1`, it automatically routes validation requests through `corsproxy.io` to bypass browser restrictions. No local backend setup is required.
-
-## Deployment to Vercel
-
-This project is structured for zero-config deployment to Vercel.
-
-1.  Push the repository to GitHub.
-2.  Import the repository into Vercel.
-3.  Ensure the Framework Preset is set to **Other**.
-4.  Leave Build Command and Output Directory empty (or default).
-5.  Deploy.
-
-Vercel will detect the `index.html` as the static output and compile the `api/validate.js` function into a Serverless Function automatically.
-
-_Note: There are currently no environment variables required for deployment (`.env` is not needed)._
+_Note: The app automatically routes its requests through a secure proxy when run locally, so you don't need to configure a local backend to test it._
